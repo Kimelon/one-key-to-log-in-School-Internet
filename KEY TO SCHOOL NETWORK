@@ -1,0 +1,45 @@
+import requests
+import os
+import time
+ 
+def openwifi():
+    os.system('netsh wlan connect name=i-NUIST')
+    time.sleep(1)
+     
+def killtask():
+    os.system('taskkill /f /im Chrome.exe ')
+ 
+def login():
+    thedata={'domain':'CMCC',
+           'enablemacauth':'0',
+           'password':'MTIzMzIx',
+           'username':'15295738388'
+          }     
+    theheader={
+    'Host': 'a.nuist.edu.cn',
+    'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.101 Safari/537.36',
+    'Accept':'application/json, text/javascript, */*; q=0.01',
+    'Accept-Language': 'zh-CN,zh;q=0.8',
+    'Accept-Encoding': 'gzip,deflate',
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'X-Requested-With': 'XMLHttpRequest',
+    'Referer':'http://a.nuist.edu.cn/',
+    'Content-Length': '66',
+
+    'Cookie':'PHPSESSID=169cdh746o32s3kj5e4kdh9pf5;\
+     think_language=zh-CN; sunriseUsername=15295738388; \
+     sunriseDomain=CMCC; sunriseRememberPassword=true; sunrisePassword=123321',
+    'Connection':'keep-alive',
+}
+
+    url="http://a.nuist.edu.cn/index.php/index/login"
+    p=requests.post(url,data=thedata,headers=theheader)
+    
+ 
+def main():
+    openwifi()
+    login()
+    killtask()
+    os.exit(0)
+
+main()
